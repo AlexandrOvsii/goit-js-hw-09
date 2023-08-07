@@ -1,4 +1,4 @@
-import Notiflix from 'notiflix';
+import Notiflix from 'notiflix'; //подключаем библиотеку
 
 const refs = {
   form: document.querySelector('.form'),
@@ -7,12 +7,12 @@ const refs = {
   amountInput: document.querySelector('[name=amount]'),
 };
 
-refs.form.addEventListener('submit', onSubmit);
+refs.form.addEventListener('submit', onSubmit); //вешаем слушателя событий на сабмит и создаем ф-цию
 
 function onSubmit(evt) {
-  evt.preventDefault();
+  evt.preventDefault(); //сбрасываем станд. настройки браузера
 
-  const firstDelay = Number(refs.delayInput.value);
+  const firstDelay = Number(refs.delayInput.value); //
   const delayStep = Number(refs.stepInput.value);
   const amount = Number(refs.amountInput.value);
 
@@ -23,7 +23,9 @@ function createPromises(firstDelay, delayStep, amount) {
   for (let i = 1; i <= amount; i += 1) {
     const delay = firstDelay + (i - 1) * delayStep;
 
-    createPromise(i, delay)
+    let position = i;
+
+    createPromise(position, delay)
       .then(({ position, delay }) => {
         Notiflix.Notify.success(
           `✅ Fulfilled promise ${position} in ${delay}ms`
@@ -35,6 +37,7 @@ function createPromises(firstDelay, delayStep, amount) {
         );
       });
   }
+  // refs.form.reset();
 }
 
 function createPromise(position, delay) {
