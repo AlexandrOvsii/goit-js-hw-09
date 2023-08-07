@@ -5,8 +5,6 @@ const refs = {
   delayInput: document.querySelector('[name=delay]'),
   stepInput: document.querySelector('[name=step]'),
   amountInput: document.querySelector('[name=amount]'),
-
-  button: document.querySelector('.form button'),
 };
 
 refs.form.addEventListener('submit', onSubmit);
