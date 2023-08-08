@@ -6,9 +6,12 @@ const refs = {
   hours: document.querySelector('[data-hours]'),
   minutes: document.querySelector('[data-minutes]'),
   seconds: document.querySelector('[data-seconds]'),
+  timePicker: document.getElementById('datetime-picker'),
 
   startButton: document.querySelector('[data-start]'),
 };
+
+refs.startButton.disabled = true; // Делаем кнопку "Start" чтобы она была неактивной
 
 function addLeadingZero(value) {
   return value.toString().padStart(2, '0');
@@ -22,6 +25,8 @@ function updateTimerDisplay({ days, hours, minutes, seconds }) {  // Функц�
 }
 
 function startTimer(endDate) {
+  refs.timePicker.disabled = true;
+
   const intervalId = setInterval(() => {
     // Устанавливаем интервал
     const currentDate = new Date(); // Получаем текущее время
@@ -32,6 +37,7 @@ function startTimer(endDate) {
       clearInterval(intervalId);
       updateTimerDisplay({ days: 0, hours: 0, minutes: 0, seconds: 0 }); // Обновляем отображение таймера
       refs.startButton.disabled = false; // Отключаем кнопку "Start", чтобы она была неактивной
+      refs.timePicker.disabled = false; //возвращаем состояние инпута после окончания таймера, чтобы можно было выбирать даты
     } else {
       // Если разница времени > 0,
       const time = convertMs(timeDifferent); // Конвертируем разницу времени в формат дней, часов, минут и сек
@@ -45,13 +51,14 @@ function handleDateSelection(selectedDates) {
   const currentDate = new Date(); // Получаем текущую дату и время
 
   if (selectedDate <= currentDate) {
-    window.alert('Please choose a date in the future');    //показываем alert
     refs.startButton.disabled = true; //делаем кнопку "Start" не активной
+    window.alert('Please choose a date in the future');    //показываем alert
     return;
   } else {
     refs.startButton.disabled = false; //делаем кнопку "Start" активной
     refs.startButton.addEventListener('click', () => {
       startTimer(selectedDate);
+      refs.startButton.disabled = true; // Делаем кнопку "Start" неактивной изначально
     });
   }
 }

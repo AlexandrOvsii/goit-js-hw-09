@@ -12,11 +12,11 @@ refs.form.addEventListener('submit', onSubmit); //вешаем слушател�
 function onSubmit(evt) {
   evt.preventDefault(); //сбрасываем станд. настройки браузера
 
-  const firstDelay = Number(refs.delayInput.value); //
-  const delayStep = Number(refs.stepInput.value);
-  const amount = Number(refs.amountInput.value);
+  const firstDelay = Number(refs.delayInput.value); //при нажатии кнопки записываем значение, которые пришли из инпутов
+  const delayStep = Number(refs.stepInput.value); //при нажатии кнопки записываем значение, которые пришли из инпутов
+  const amount = Number(refs.amountInput.value); //при нажатии кнопки записываем значение, которые пришли из инпутов
 
-  createPromises(firstDelay, delayStep, amount);
+  createPromises(firstDelay, delayStep, amount); //запускаем ф-цию с этими значениями
 }
 
 function createPromises(firstDelay, delayStep, amount) {
